@@ -6,7 +6,7 @@ PATH = {
 
 ENDPOINT = {
     "vector_search": "fomc_transcript_endpoint",
-    "emb_model": "chatterbytes_bge_small_en_v1_5_v3,
+    "emb_model": "chatterbytes_bge_small_en_v1_5_v3",
     "llm_model": "chatterbytes_dbrx_instruct"
 }
 
