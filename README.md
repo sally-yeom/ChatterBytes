@@ -29,7 +29,7 @@ Process Steps:
  2. Chunking
  3. Embedding
  4. VectorDB Indexing
- 5. Retriever
+ 5. Retrievering
  6. Generate LLM Chat Response
 
-The demo page can be viewed at [LINK](https://vimeo.com/1025217497?share=copy).
+The demo page can be viewed at [LINK](https://vimeo.com/1025217497).
