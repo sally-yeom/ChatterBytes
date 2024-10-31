@@ -16,7 +16,7 @@ Databricks Tools Utilized:
  - Serving Endpoints
  - Datasets Utilized:
 
-Datasets
+Datasets:
  - Full transcripts of FOMC press conferences from March 18, 2015, to September 18, 2024 (covering the past 10 years).
  - The FOMC press conference transcripts are open datasets available at [Federal Reserve](https://www.federalreserve.gov/aboutthefed.htm).
 
