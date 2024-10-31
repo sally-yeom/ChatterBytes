@@ -25,31 +25,33 @@ def get_vs_endpoint():
         vsc.create_endpoint(name=config.ENDPOINT['vector_search'], endpoint_type='STANDARD')
 
 
+
 def create_vs_index():
     spark = SparkSession.builder.getOrCreate()
     spark.sql(f"ALTER TABLE {config.PATH['source']} SET TBLPROPERTIES (delta.enableChangeDataFeed = true)")
 
     vsc = VectorSearchClient()
 
-    # def index_exists(vsc, endpoint_name, index_name):
-    #     try:
-    #         vsc.get_index(endpoint_name, index_name)
-    #         return True
-    #     except Exception as e:
-    #         return False
+    def index_exists(vsc, endpoint_name, index_name):
+        try:
+            vsc.get_index(endpoint_name, index_name)
+            return True
+        except Exception as e:
+            return False
     
-    # if not index_exists(vsc, config.ENDPOINT['vector_search'], config.PATH['index']):
-    vsc.create_delta_sync_index(
-        endpoint_name=config.ENDPOINT['vector_search'],
-        index_name=config.PATH['index'],
-        source_table_name=config.PATH['source'],
-        pipeline_type='TRIGGERED',
-        primary_key=config.COLUMN['pk'],
-        embedding_source_column=config.COLUMN['emb_src_col'],
-        embedding_model_endpoint_name=config.ENDPOINT['emb_model']
+    if not index_exists(vsc, config.ENDPOINT['vector_search'], config.PATH['index']):
+        vsc.create_delta_sync_index(
+            endpoint_name=config.ENDPOINT['vector_search'],
+            index_name=config.PATH['index'],
+            source_table_name=config.PATH['source'],
+            pipeline_type='TRIGGERED',
+            primary_key=config.COLUMN['pk'],
+            embedding_source_column=config.COLUMN['emb_src_col'],
+            embedding_model_endpoint_name=config.ENDPOINT['emb_model']
         )
-    # else:
-    #     vsc.get_index(config.ENDPOINT['vector_search'], config.PATH['index'])
+    else:
+        vsc.get_index(config.ENDPOINT['vector_search'], config.PATH['index'])
+
 
 
 def get_retriever(persist_dir: str = None):

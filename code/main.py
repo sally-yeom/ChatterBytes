@@ -5,19 +5,25 @@ from chat_model import *
 import config
 
 
+def chat_model_response(question):
+    return create_chat_model(question).invoke(question)
+
+
 def run(indexing=True):
+    print(f' [ START ] Get pdf')
     all_chunks = get_pdf()
+    print(f' [ END ] Get pdf')
+    print(f' [ START ] Save chunked data')
     create_save_df(all_chunks)
-    chain = create_chat_model()
-
+    print(f' [ END ] Save chunked data')
+    
     if indexing:
+        print(f' [ START ] Create vectorstore endpoint')
         get_vs_endpoint()
+        print(f' [ END ] Create vectorstore endpoint')
+        print(f' [ START ] Create vectorstore index')
         create_vs_index()
-        
-    question = {'query': 'Give me an economic outlook for January next year.'}
-    answer = chain.invoke(question)
-
-    print(answer)
+        print(f' [ END ] Create vectorstore index')
 
 
 if __name__ == "__main__":
