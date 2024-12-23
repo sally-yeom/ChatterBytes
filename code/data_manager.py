@@ -8,7 +8,7 @@ import os
 
 
 def get_pdf():
-    path = "/Workspace/Users/euyeom@ea.com/Data/"
+    path = "/Workspace/Users/Data/"
     pdf_files = [os.path.join(path, filename) for filename in os.listdir(path)]
     all_chunks = []
 
