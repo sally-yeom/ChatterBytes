@@ -15,10 +15,8 @@ print(os.getcwd())
 sys.path.append(os.path.join(os.getcwd(), 'code'))
 
 
-from chat_model import chat_model_response
+from chatter import Chatter
 from IPython.display import clear_output
-
-import main, chat_model
 
 # COMMAND ----------
 
@@ -30,7 +28,7 @@ import main, chat_model
 
 def FOMC_Chatter(query):
     question = {'query': query}
-    result = chat_model_response(question)['result']
+    result = Chatter().chat(question)['result']
     clear_output(wait=True)
     print(result)
 
