@@ -1,6 +1,3 @@
-import os
-import time
-
 from pyspark.sql import SparkSession
 from langchain_community.vectorstores import DatabricksVectorSearch
 from langchain.schema import BaseRetriever

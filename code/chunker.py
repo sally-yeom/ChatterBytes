@@ -5,9 +5,7 @@ from typing import List
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-
 import config
-
 
 
 class Chunker:
@@ -30,8 +28,7 @@ class Chunker:
         loader = PyPDFLoader(pdf_path)
         documents = loader.load()
 
-        date = extract_date_from_filename(pdf_path)
-
+        date = self.extract_date_from_filename(pdf_path)
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=self.chunk_size, chunk_overlap=self.chunk_overlap)
 
         all_chunks = []
@@ -45,7 +42,7 @@ class Chunker:
                         'year': int(date.year),
                         'month': int(date.month),
                         'day': int(date.day),
-                        'chunk_id': generate_chunk_id(date, i + 1)
+                        'chunk_id': self.generate_chunk_id(date, i + 1)
                     }
                 }
                 all_chunks.append(chunk_doc)
